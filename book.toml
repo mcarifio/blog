@@ -1,0 +1,9 @@
+[book]
+authors = ["Mike Carifio"]
+multilingual = false
+src = "src"
+title = "Mike Carifio's Blog"
+
+[publish]
+rsync = "rsync url"
+
