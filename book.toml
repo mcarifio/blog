@@ -2,8 +2,13 @@
 authors = ["Mike Carifio"]
 multilingual = false
 src = "src"
-title = "Mike Carifio's Blog"
+title = "A Mainah Hackah"
 
+[build]
+build-dir = "blog"
+create-missing = false
+
+; how do I dig out `publish.rsync` from this configuration?
 [publish]
-rsync = "rsync url"
+rsync = "rsync -a -e ssh blog www-data@do:html/mike.carif.io/html"
 
