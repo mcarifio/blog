@@ -7,7 +7,7 @@ Started with:
 
 $ rustup update
 $ cargo install mdbook
-$ git clone git@github.com:mcarifio/blog
+$ git clone git@github.com:mcarifio/blog # you will create your own blog
 $ cd blog
 $ mdbook init # creates the structure
 ```
@@ -15,10 +15,9 @@ $ mdbook init # creates the structure
 Each time I write a blog entry:
 ```bash
 source bin/env.source.sh
-mdbook watch  # blog updated when files are written
 mdbook serve -o # opens browser at http://localhost:3000
-emacs src/some-interesting-tidbit.md
-emacs src/SUMMARY.md
+emacs src/some-interesting-tidbit.md  ## add a new entry
+emacs src/SUMMARY.md  ## enumerate the entry in the list
 ```
 
 Publish and push:

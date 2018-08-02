@@ -37,7 +37,7 @@ So here we are, third times a charm. This time around I'm giving it a little mor
 I'm writing in Markdown (which is mostly text) and not HTML (which is mostly markup). I'm using the (so far) wonderful [mdbook](https://github.com/rust-lang-nursery/mdBook), which can build the blog "on the fly" without thinking about it.
 Well, not quite; `mdbook` is actually intended for books and technical documentation, not blogs. But a blog is just a book that unfolds over time, yes?
 I'm using [github](https://github.com/mcarifio/blog) to save drafts before publishing them with a do-it-yourself [publisher](https://github.com/mcarifio/blog/blob/master/bin/publish.sh) script.The script will grow.
-All this now seems a little hacky, but it will evolve and it has a programmer's workflow. I'll describe its evolution and it unfolds. Might be fun.
+All this now seems a little hacky, but it will evolve and it has a programmer's workflow. I'll describe its evolution as it unfolds. Might be fun.
 
 
 
