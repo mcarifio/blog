@@ -36,7 +36,4 @@ announce.sh https://mike.carif.io/blog/some-interesting-tidbit.html
 
 # TODO mike@carif.io
 
-* Master emacs's magit for writing this stuff.
-
-* Write `bin\publish.sh` for publishing in bash(?) or rust ion. Bash is a good assumption, but ion is a better scripting language.
 
