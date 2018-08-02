@@ -2,7 +2,7 @@
 
 From: Mike Carifio &lt;<mike@carif.io>&gt;\
 Date: 2018-08-01\
-Subject: Yet Another Shot At Blogging
+Subject: Yet Another Shot At Blogging\
 Tags: blog, rust, mdbook, magit, emacs, again
 
 I've always been a reluctant blogger. It seemed ostentacious and showy. Good writers don't waste your time with their drivel and it's _really_ drivel if you don't write, 
