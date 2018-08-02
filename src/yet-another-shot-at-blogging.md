@@ -1,9 +1,13 @@
-# Yet Another Shot At Blogging
-
-From: Mike Carifio &lt;<mike@carif.io>&gt;\
+---
+Author: Mike Carifio &lt;<mike@carif.io>&gt;\
+Title: Yet Another Shot At Blogging\
 Date: 2018-08-01\
-Subject: Yet Another Shot At Blogging\
-Tags: blog, rust, mdbook, magit, emacs, again
+Tags: blog, rust, mdbook, magit, emacs, again\
+Blog: https://mike.carif.io/blog/yet-another-shot-at-blogging.html\
+VCS: https://www.github.com/mcarifio/blog/src/yet-another-shot-at-blogging.md
+---
+
+# Yet Another Shot At Blogging
 
 I've always been a reluctant blogger. It seemed ostentacious and showy. Good writers don't waste your time with their drivel and it's _really_ drivel if you don't write, 
 write some more and rewrite that. As Hawthorne said "Easy reading is damn hard writing." Who has time for that? 
