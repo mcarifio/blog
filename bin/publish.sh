@@ -4,8 +4,10 @@ blog=$(readlink -f ${here}/../blog)
 suffix=${blog##*/}
 
 target=${1:-www-data@do:html/mike.carif.io/html}
+
+(cd ${here}/..; mdbook build)
 # scp changes up to blog, url currently hardcoded. Assumes lotsa ssh configuration too.
-rsync -ravu -I -e ssh ${blog}/ ${target}/${suffix}
+rsync -ravuc -e ssh ${blog}/ ${target}/${suffix}
 # scp -r ${blog} ${target}/${suffix}
 
 # push content to medium
