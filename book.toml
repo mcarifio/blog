@@ -8,7 +8,7 @@ title = "A Mainah Hackah"
 build-dir = "blog"
 create-missing = false
 
-; how do I dig out `publish.rsync` from this configuration?
+# how do I dig out `publish.rsync` from this configuration?
 [publish]
-rsync = "rsync -a -e ssh blog www-data@do:html/mike.carif.io/html"
+# rsync = "rsync -a -e ssh blog www-data@do:html/mike.carif.io/html"
 
