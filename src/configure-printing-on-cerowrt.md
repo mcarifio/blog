@@ -3,8 +3,8 @@ Author: Mike Carifio &lt;<mike@carif.io>&gt;\
 Title: How To Configure USB Printing on a CeroWrt Router\
 Date: 2013-01-01\
 Tags: bufferbloat, cerowrt, netgear, router, printer, ipp\
-Blog: https://mike.carif.io/blog/configure-printing-on-cerowrt.html\
-VCS: https://www.github.com/mcarifio/blog/src/configure-printing-on-cerowrt.md
+Blog: [https://mike.carif.io/blog/configure-printing-on-cerowrt.html]([https://mike.carif.io/blog/configure-printing-on-cerowrt.html)\
+VCS: [https://www.github.com/mcarifio/blog/blob/master/src/configure-printing-on-cerowrt.md](https://www.github.com/mcarifio/blog/blob/master/src/configure-printing-on-cerowrt.md)
 ---
 
 # How To Configure USB Printing on a CeroWrt Router
