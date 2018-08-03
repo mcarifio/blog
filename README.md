@@ -13,13 +13,11 @@ $ mdbook init # creates the structure
 ```
 
 Each time I write a blog entry:
+
 ```bash
 source bin/env.source.sh  # create a post-commit hook if one doesn't exist
-mkmd src/src/some-interesting-tidbit.md
-
+emacsclient $(mkmd.sh some-interesting-tidbit) src/SUMMARY.md ## edit the new entry
 mdbook serve -o # opens browser at http://localhost:3000
-emacs src/some-interesting-tidbit.md  ## add a new entry
-emacs src/SUMMARY.md  ## enumerate the entry in the list
 ```
 
 Publish and push:
