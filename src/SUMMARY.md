@@ -5,5 +5,6 @@
 - [YASAB (Yet Another Shot at Blogging)](./yet-another-shot-at-blogging.md)
 - [... And What Happens After The First Entry?](./and-what-happens-after-the-first-entry.md)
 - [Configure Printing on `cerowrt`](./configure-printing-on-cerowrt.md)
-
-
+- [Doing The First Phone Screen](./doing-the-first-phone-screen.md)
+- [Git Server Over SSH](./git-server-over-ssh.md)
+<!-- - [ Chasing SSH Timeouts (and Other Tales of Woe)](./chasing-ssh-timeouts.md) -->

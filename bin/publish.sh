@@ -9,4 +9,5 @@ target=${1:-www-data@do:html/mike.carif.io/html}
 # scp changes up to blog, url currently hardcoded. Assumes lotsa ssh configuration too.
 # scp -r ${blog} ${target}/${suffix}
 rsync -ravuc -e ssh ${blog}/ ${target}/${suffix}
+gnome-open https://mike.carif.io/blog
 
