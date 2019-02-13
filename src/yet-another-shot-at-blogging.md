@@ -4,7 +4,7 @@ Title: Yet Another Shot At Blogging\
 Date: 2018-08-01\
 Tags: blog, rust, mdbook, magit, emacs, again\
 Blog: [https://mike.carif.io/blog/yet-another-shot-at-blogging.html](https://mike.carif.io/blog/yet-another-shot-at-blogging.html)\
-VCS: [https://www.github.com/mcarifio/blog/blob/master/src/yet-another-shot-at-blogging.md](https://www.github.com/mcarifio/blog/blob/master/src/yet-another-shot-at-blogging.md)xs
+VCS: [https://www.github.com/mcarifio/blog/blob/master/src/yet-another-shot-at-blogging.md](https://www.github.com/mcarifio/blog/blob/master/src/yet-another-shot-at-blogging.md)
 ---
 
 # Yet Another Shot At Blogging

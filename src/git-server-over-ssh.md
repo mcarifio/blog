@@ -1,13 +1,33 @@
 ---
 Author: Mike Carifio &lt;<mike@carif.io>&gt;\
-Title: Git Server Over SSH\
+Title: A Git Server Over SSH\
 Date: 2019-02-09\
-Tags: \
+Tags: #git, #ssh, #ssh_config, #git_server\
 Blog: [https://mike.carif.io/blog/git-server-over-ssh.html](https://mike.carif.io/blog/git-server-over-ssh.html)\
 VCS: [https://www.github.com/mcarifio/blog/blob/master/src//home/mcarifio/writing/blog/mike.carif.io/src/git-server-over-ssh.md](https://www.github.com/mcarifio/blog/blob/master/src//home/mcarifio/writing/blog/mike.carif.io/src/git-server-over-ssh.md)
 ---
 
-# Git Server Over SSH
+# A Git Server Over SSH
+
+## TL;DR
+
+Following the directions below, you can manually create a remote git repository using [scp](https://www.computerhope.com/unix/scp.htm) as the transport protocol and [ssh](https://www.openssh.com/) public keys for authenication. 
+The presentation is bottom up and incremental, making potential problems easier to diagnose and fix and underlying concepts easier to understand.
+
+I assume you know (at least a little):
+
+* [bash](https://www.gnu.org/software/bash/manual/html_node/), the Bourne Again Shell (and the Linux standard)
+
+* [git](https://git-scm.com/)
+
+* [ssh_config](https://man.openbsd.org/ssh_config) at least a little.
+
+The benefit of reading this is:
+
+* You'll have an operational git service on a (remote) Linux machine which you control and which has no additional cost beyond the cloud costs.
+
+* A better understanding of how [github](https://www.github.com/), [bitbucket](https://www.bitbucket.com/) or [gitlabs](https://www.gitlabs.com/) work.
+  In many cases, it's more cost-effecive to use a specialized service. Sometimes, however, the flexibilty of rolling your own is warrented. 
 
 ## Introduction
 
@@ -18,11 +38,11 @@ This post was motivated from an attempt to use a remote server (at Digital Ocean
 but stumbled a few times along the way. You can learn from my scrapes.
 
 Although there are several approaches to serving a git repository remotely, ssh is (claimed anyways) the easiest for a small number of users, say less than 10. 
-You need to know a little bit about creating ssh keys, scp and a bit about [ssh config]() and even DNS (to create memorable DNS hostname). 
-There are moving parts, but with a little bit of discipline and some testing along the way, you should be able to do what you need. In particular, you will already
-have ssh installed on your remote (Linux) machine, so you don't need to install software.
+You need to know a little bit about creating ssh keys, scp and a bit about ssh config and even DNS (to create memorable hostnamea). 
+There are moving parts, but with a little bit of discipline and some testing along the way, you should be able to do what you need. In particular, you will almost always
+have ssh and git installed on your remote (Linux) machine, so you don't need to install software.
 
-Before we leave the shore below, a few orienting comments. This post makes a few assumptions, namely:
+Before we leave the shore, a few orienting comments. This post makes a few assumptions, namely:
 
 * You're using a current (as of 02/2019) Linux, say Ubuntu `cosmic` or Fedora 29 on both your local and remote hosts.
 
@@ -44,13 +64,13 @@ Before we leave the shore below, a few orienting comments. This post makes a few
   debug again. Yes, this can be time consuming, but so is flailing.
 
 Having read more than a few longer tutorials like this one, I'm often torn between the impatience of getting something done and moving on to "more important things" and taking a moment (or an hour or even an afternoon)
-to understand what's actualy going on. Having spent a few days myself on this -- doing the initial exercise of setting up a remote git repo, screwing it up, realizing there isn't anything tutorial and current on this topic, writing it
+to understand what's actualy going on. Having spent a few days myself on this -- doing the initial exercise of setting up a remote git repo, screwing it up, realizing there isn't a current tutorial on this topic, writing it
 -- I think it's worthy of your attention, but let me sell you -- briefly! -- now. In the age of the cloud (i.e. now), you will need to ssh into remote machines all the time, either directly (using the `ssh` command or all it's many variants e.g. `pagent` on windows) or indirectly using some wrapper e.g. `git`. If, like me, you learned enough in the past to "get by" with lotsa "cut-and-paste", you'll need to up your game a little bit and [level up](https://en.m.wiktionary.org/wiki/level_up) as my son likes to say. Of course there are books devoted to this topic. No, I haven't read them either.
 
 ## Notation
 
 Some notes on notation. This post follows the usual pattern of "explain the next step", do the step (cut-and-paste the bash commands) and then "test the results". If you did the step but don't get the results you want, you will need
-to figure out why. Unfortunately, that might include that my tutorial is flawed. But that's the point of testing each step. You are building up the final answer. The commands are designed to be "cut-and-paste" but you still need to think as you do them. I would have loved to have written (say) a python script that "just creates a remote git repo over ssh". Maybe someday I will ... or someone more capable will. But for now, it's manual. You'll learn something!
+to figure out why (including that my tutorial is flawed). But that's the point of testing each step. You are building up the final answer. The commands are designed to be "cut-and-paste" but you still need to think as you do them. I would have loved to have written (say) a python script that "just creates a remote git repo over ssh". Maybe someday I will ... or someone more capable will. But for now, it's manual. You'll learn something!
 
 Let's start.
 
@@ -58,10 +78,11 @@ First, create a few local bash variables to make the "cut-and-paste" easier.
 
 ```bash
 $ p=''  # yes, this is confusing, I'll describe it below; note that it's the prompt however for all subsequent commands
+$ PS1="$PS1p"  # Add `p` to the end of the bash prompt 
 $p export local_user=$USER  # or the whatever name you want for the local user
 $p export local_host=$HOST
 $p export remote_user=$USER
-$p export remote_host=atlantis.local # a test machine on my local lan
+$p export remote_host=atlantis.local # a test machine on my local lan, you'll use your remote server
 $p echo ${local_host}
 $p echo ${local_user}
 $p echo ${remote_host}
@@ -76,6 +97,7 @@ $ $p export local_host=$HOST
 $ $p export remote_user=$USER
 $ $p export remote_host=atlantis.local # a test machine on my local lan
 $ $p echo ${local_host}
+shuttle
 $ $p echo ${local_user}
 mcarifio
 $ $p echo ${remote_host}
@@ -88,7 +110,7 @@ Since `$p` expands to the empty string, it's effectively a "no-op".
 
 ## Preparation
 
-Let's do a quick smoketest. Can you run the `ssh` command? One you do, what have you run?
+Let's do a quick smoketest. Can you run the `ssh` command? Once you do, what have you run?
 
 ```bash
 $p ssh -V  # reports a newish version?
@@ -117,7 +139,7 @@ $ dnf repoquery --installed -f /usr/bin/ssh  # fc29, ssh installed from a system
 openssh-clients-0:7.9p1-3.fc29.x86_64
 ```
 
-Hopefully, you'll find no shenigans with command aliases, bash functions or scripts/executables shadowing the official `ssh` that came from a platform package. Likewise, you're not getting shuttled off to another executable.
+Hopefully, you'll find no shenigans with command aliases, bash functions or scripts/executables shadowing the official `ssh` binary that came from a platform package. Likewise, you're not getting shuttled off to another executable.
 I'm demonstrating a healthy paranoia here, but stranger things have happened. The Interwebs also advocates all sorts of "fixes" for `ssh` which involve intercepting `/usr/bin/ssh` in some way. Very creative. You probably want to avoid them if possible.
 
 Can you connect to `${remote_host}`?
@@ -125,11 +147,11 @@ Can you connect to `${remote_host}`?
 ```bash
 $p ssh ${remote_host} touch .hushlogin  # stop login messages
 $p ssh  ${remote_host} /bin/true  # no error?
-$p ssh ${remote_host} id  # is this ${remote_user}?
+$p ssh ${remote_host} id  # is ${remote_user} reported?
 uid=1000(mcarifio) gid=1000(mcarifio) groups=1000(mcarifio),10(wheel),970(wireshark)
 ```
 
-The `uid` command will return something different for you, but hopefully `${remote_user}` is the uid.
+The `uid` command will return something different for you, but hopefully `${remote_user}` is the uid you expected.
 
 Alternatively, you can ssh as root. (This requires some configuration at ${remote_host}):
 
@@ -172,7 +194,7 @@ identityfile ~/.ssh/id_ed25519
 identityfile ~/.ssh/id_xmss
 ```
 
-You have to understand what the configuration directives and values mean, which isn't always obvious. Experimenting can augment reading.
+You have to understand what the configuration directives and values mean, which isn't always obvious. Experimentation can augment reading.
 
 You can ask `ssh` to trace what it's trying to do during a connection with `-v`. The more `v`'s you add the more verbose the output:
 
@@ -211,14 +233,14 @@ So far:
 
 ## Passwordless SSH
 
-Preferably, you can do the operations above using ssh keys and not a password. If you can't, then do the following:
+Preferably, you can do the operations above using ssh keys and not a password. If you can't, then you should create an RSA public/private keypair dedicted to git+scp.
 
 ```bash
-$p keys=${HOME}/.ssh/keys.d  # put new keys in a dedicated folder
+$p keys=${HOME}/.ssh/keys.d  # my personal key hygiene; I put keys in a separate folder
 $p mkdir -vp ${keys}  # create the key folder
-mkdir: created directory '/home/remote_user/.ssh/keys.d'
+mkdir: created directory '/home/${remote_user}/.ssh/keys.d'
 
-$p pathname=${keys}/${remote_user}@${remote_host}_rsa
+$p pathname=${keys}/${remote_user}@${remote_host}_rsa  # absolute path of the private half of the keypair
 $ ssh-keygen -N '' -t rsa -b 4096 -o -C "${HOST}:${pathname} for user ${USER}" -f ${pathname}  # no password for key, simplifies later usage
 Your identification has been saved in ${keys}/${remote_user}@${remote_host}_rsa.
 Your public key has been saved in ${keys}/${remote_user}@${remote_host}_rsa.pub.
@@ -240,21 +262,22 @@ $ cat ${pathname}.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3AVUpCzaJjJSSXplK5tVSXisRFxZ7jfKvksAL+H7z/gOR0OpXaxc2LtcnsbqhuwfYgl1Wz2+D+LxXFHlv9+Ag+2wf8kdkKuBaGXgAPWybPU7EOPMqE9SB8VrMfNR7/9PCpC0MlsEa07Gta0GswW2I6WUZg7lrx75/cz5LrP5uvlVKIS4Zhm9sDCPnkWlyhgFJlmjxJOr8qJB6QbpbMtIogkn5t4TVcE+X4jiV+KYe3AmwvL1XgLrMUTF1zG6N/zBhni7FT2m6Cra7GPcxswWDkrTx4r88gmynaoyAz/0OpqoWHxEx14V97eegP8z59DYjla0pC5XTk5DGe0aCkpecxD81BYLzvmnnrbUcf61igQ6gbRMNmNlwd0Xqsow6KUTPpkulWAi67Svh9quKz4oXR01ftj6yePoycRaFBhqF3FOteiYWK+wsKef2tUOFf3Cme9op/xY3XnUixopJolRV0CM5DwbxN2F8MkyYdFcF9o3NVvfdv2FT+A4oQLR89TB1yhoHiDA2/MD5aCkW+NDU7qsdOKQWK0X+kVdEuaiXougfpJdsc/bV3wUTVfPKaGu5JrNo+xvaOLV8290eyevxsQfFDr9kgk0rX3ro35GD42Lhj1aGiocWDZ19M2nDToZkdOBT7sX4KjGB1og4FbODQoxxGE3a6reZC+OmJV4lOw== ${HOST}:${pathname} for user ${USER}
 
 $ ssh-copy-id -i ${pathname} ${remote_user}@${remote_host}  # password prompt?
-$ ssh -v -i ${pathname} ${remote_user}@${remote_host}  # no password
+$ ssh -v -i ${pathname} ${remote_user}@${remote_host}  # no password prompt
 $ cat < EOF >> ~/.ssh/config
 Host ${remote_host}
   IdentitiesOnly=yes
   IdentityFile=${pathname}
   User=${remote_user}
 EOF
-$ ssh ${remote_host} id
+$ ssh ${remote_host} id  # same as above with few command line arguments
+uid=1000(mcarifio) gid=1000(mcarifio) groups=1000(mcarifio),10(wheel),970(wireshark)
 ```
 
 At this point, you can ssh into `${remote_host}` as user `${remote_user}`. Do so:
 
 ```bash
 $p ssh ${remote_host}
-$p sudo -i
+$p sudo -i  # may require a password
 # adduser -G sudo git
 # usermod -G git ${SUDO_USER}
 # install -v -o git -g git --mode 0700 -d ~git/.ssh
@@ -271,13 +294,15 @@ In a separate terminal window on `${local_host}` as user `${local_user}` try ssh
 
 ```bash
 $ ssh -v git@${remote_host} id 
-uid=1001(git) gid=1001(git) groups=1000(sudo) ...
+... error messages ...
 ```
+
+You should get an error message. User `git` doesn't have a password and it doesn't have an ssh key either. You're about to rectify that.
 
 At this point, you have (at least) three users at `${remote_host}`: `${remote_user}`, `root` and `git`. Using the technique above, create an rsa key pair for `git` and copy it to `${remote_host}` for user `git`:
 
 ```bash
-$p pathname=${keys}/git@${remote_host}_rsa
+$p pathname=${keys}/git@${remote_host}_rsa  # user is hardcoded to git
 $p ssh-keygen -N '' -t rsa -b 4096 -o -C "${HOSTNAME}:${pathname} for user git" -f ${pathname}  # no password for key, simplifies later usage
 Your identification has been saved in ${pathname}
 Your public key has been saved in ${pathname}.pub
@@ -332,7 +357,7 @@ no differences
 
 ## Debugging GIT
 
-What do you do if you don't get this kind of out or you can't even connect (sounds familiar)? You can ask git to show you what it's doing:
+What do you do if you don't get this kind of output or you can't even connect (sounds familiar)? You can ask git to show you what it's doing:
 
 ```bash
 $p GIT_SSH_COMMAND="ssh -vvv" GIT_TRACE=1 git clone git@${remote_host}:repos/smoketest.git
@@ -398,7 +423,7 @@ Host git ${remote_host}
 EOF
 ```
 
-Ask the new user to email you `git@${remote_host}_rsa.pub`, which you will upload to user `git`'s `authorized_users`:
+Ask the new user to email you _only_ the public half of the keypair, which should end with `.pub`, e.g. `git@${remote_host}_rsa.pub`. You will append it  to user `git`'s `authorized_users` on the remote host:
 
 ```bash
 scp git@${remote_host}_rsa.pub git@${remote_host}:.ssh
@@ -410,10 +435,6 @@ Then ask `${user}` to test:
 ```bash
 $p git clone git@git.${remote_host}:repos/smoketest.git /tmp/repos/smoketest
 ```
-
-
-
-
 
 
 
