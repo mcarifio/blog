@@ -7,4 +7,5 @@
 - [Configure Printing on `cerowrt`](./configure-printing-on-cerowrt.md)
 - [Doing The First Phone Screen](./doing-the-first-phone-screen.md)
 - [Git Server Over SSH](./git-server-over-ssh.md)
-<!-- - [ Chasing SSH Timeouts (and Other Tales of Woe)](./chasing-ssh-timeouts.md) -->
+- [ECMAScript Modules (Currently) Considered Harmful](./es-modules-considered-harmful.md)
+<!-- - [eman: Anatomy of a Hack](./eman.md) -->
