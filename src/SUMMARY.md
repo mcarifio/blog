@@ -8,4 +8,5 @@
 - [Doing The First Phone Screen](./doing-the-first-phone-screen.md)
 - [Git Server Over SSH](./git-server-over-ssh.md)
 - [ECMAScript Modules (Currently) Considered Harmful](./es-modules-considered-harmful.md)
+- [(In|Out) x (Old|Gnu)](./in-out-old-gnu.md)
 <!-- - [eman: Anatomy of a Hack](./eman.md) -->
