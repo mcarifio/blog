@@ -9,4 +9,5 @@
 - [Git Server Over SSH](./git-server-over-ssh.md)
 - [ECMAScript Modules (Currently) Considered Harmful](./es-modules-considered-harmful.md)
 - [(In|Out) x (Old|Gnu)](./in-out-old-gnu.md)
+- [Freenode, Hexchat and cert, Oh My!](./freenode-hexchat-and-cert.md)
 <!-- - [eman: Anatomy of a Hack](./eman.md) -->
