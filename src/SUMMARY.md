@@ -10,4 +10,7 @@
 - [ECMAScript Modules (Currently) Considered Harmful](./es-modules-considered-harmful.md)
 - [(In|Out) x (Old|Gnu)](./in-out-old-gnu.md)
 - [Freenode, Hexchat and cert, Oh My!](./freenode-hexchat-and-cert.md)
+- [Git Server Over SSH 2e](./git-server-over-ssh-2e.md)
+- [Userscripts](./userscripts.md)
 <!-- - [eman: Anatomy of a Hack](./eman.md) -->
+<!-- - [Hiring Economics](./hiring-economics.md) -->
