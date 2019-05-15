@@ -19,8 +19,8 @@ VCS: [https://www.github.com/mcarifio/blog/blob/master/src/${md}](https://www.gi
 # ${title}
 
 Write Here...
-Then: "git commit -am "${title}" && git push"
 
+<!-- @publish: git commit -am "${title}" && git push -->
 EOF
 
 summary=${here}/../src/SUMMARY.md
