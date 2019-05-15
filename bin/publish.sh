@@ -3,7 +3,8 @@ here=$(readlink -f $(dirname ${BASH_SOURCE}))
 blog=$(readlink -f ${here}/../blog)
 suffix=${blog##*/}
 
-target=${1:-www-data@do:html/mike.carif.io/html}
+page=${1:-''}
+target=${2:-www-data@do:html/mike.carif.io/html}
 
 (cd ${here}/..; mdbook build)
 # scp changes up to blog, url currently hardcoded. Assumes lotsa ssh configuration too.

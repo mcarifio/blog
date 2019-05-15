@@ -1,9 +1,9 @@
 ---
-Author: Mike Carifio &lt;<mike@carif.io>&gt;
-Title: Thinking is Hard\
+Author: Mike Carifio &lt;<mike@carif.io>&gt; \
+Title: Thinking is Hard \
 Date: 2019-05-15\
-Tags: #git, #mdbook, #automation\ 
-Blog: [https://mike.carif.io/blog/thinking-is-hard](https://mike.carif.io/blog/thinking-is-hard)\
+Tags: #git, #mdbook, #automation \ 
+Blog: [https://mike.carif.io/blog/thinking-is-hard](https://mike.carif.io/blog/thinking-is-hard) \
 VCS: [https://www.github.com/mcarifio/blog/blob/master/src//home/mcarifio/writing/blog/mike.carif.io/src/thinking-is-hard.md](https://www.github.com/mcarifio/blog/blob/master/src//home/mcarifio/writing/blog/mike.carif.io/src/thinking-is-hard.md)
 ---
 

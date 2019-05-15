@@ -7,4 +7,5 @@ root=$(git rev-parse --show-toplevel)
 blog=$(readlink -f ${root}/blog)
 suffix=${blog##*/}
 bin=${root}/bin
+# enumerate files actually committed?
 ${bin}/publish.sh
