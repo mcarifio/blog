@@ -1,6 +1,9 @@
 # Summary
 
 <!-- this could be generated -->
+<!-- - [eman: Anatomy of a Hack](./eman.md) -->
+<!-- - [Hiring Economics](./hiring-economics.md) -->
+
 
 - [YASAB (Yet Another Shot at Blogging)](./yet-another-shot-at-blogging.md)
 - [... And What Happens After The First Entry?](./and-what-happens-after-the-first-entry.md)
@@ -13,5 +16,4 @@
 - [Git Server Over SSH 2e](./git-server-over-ssh-2e.md)
 - [Userscripts](./userscripts.md)
 - [TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`](./TIL-npm-reinstall-packages-from.md)
-<!-- - [eman: Anatomy of a Hack](./eman.md) -->
-<!-- - [Hiring Economics](./hiring-economics.md) -->
+- [Thinking is Hard](./thinking-is-hard.md)

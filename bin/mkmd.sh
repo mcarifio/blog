@@ -2,25 +2,29 @@
 here=$(readlink -f $(dirname ${BASH_SOURCE}))
 me=$(readlink -f ${BASH_SOURCE})
 
-name=${1:?'expecting a name'}
-html=${name}.html
-md=${here}/../src/${name}.md
+title=${1:?'expecting a title'}
+html=${2:?'expecting a filename'}
+md=$(readlink -e ${here}/..)/src/${html}.md
 
 cat <<EOF > ${md}
 ---
 Author: Mike Carifio &lt;<mike@carif.io>&gt;
-Title: ${name}
-Date: $(date +%F)
-Tags: 
-Blog: [https://mike.carif.io/blog/${html}](https://mike.carif.io/blog/${html})
+Title: ${title}\\
+Date: $(date +%F)\\
+Tags: #tag0, #tag1\\ 
+Blog: [https://mike.carif.io/blog/${html}](https://mike.carif.io/blog/${html})\\
 VCS: [https://www.github.com/mcarifio/blog/blob/master/src/${md}](https://www.github.com/mcarifio/blog/blob/master/src/${md})
 ---
 
-# ${name}
+# ${title}
 
-Write here...
+Write Here...
+Then: "git commit -am "${title}" && git push"
 
 EOF
 
-echo "- [title ${name}](./$(basename ${md}))" >> ${here}/../src/SUMMARY.md
-emacsclient ${md}
+summary=${here}/../src/SUMMARY.md
+echo "- [${title}](./$(basename ${md}))" >> ${summary}
+git add ${md} ${summary}
+emacsclient ${md} ${summary}
+
