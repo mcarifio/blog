@@ -14,3 +14,4 @@
 - [Userscripts](./userscripts.md)
 <!-- - [eman: Anatomy of a Hack](./eman.md) -->
 <!-- - [Hiring Economics](./hiring-economics.md) -->
+- [title TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`](./TIL-npm-reinstall-packages-from.md)
