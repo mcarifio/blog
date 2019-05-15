@@ -1,9 +1,9 @@
 ---
 Author: Mike Carifio &lt;<mike@carif.io>&gt;
-Title: TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`
-Date: 2019-05-15
-Tags: 
-Blog: [https://mike.carif.io/blog/TIL-npm-reinstall-packages-from.html](https://mike.carif.io/blog/TIL-npm-reinstall-packages-from.html)
+Title: TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`\
+Date: 2019-05-15\
+Tags: nvm, npm, install\
+Blog: [https://mike.carif.io/blog/TIL-npm-reinstall-packages-from.html](https://mike.carif.io/blog/TIL-npm-reinstall-packages-from.html)\
 VCS: [https://www.github.com/mcarifio/blog/blob/master/src//home/mcarifio/writing/blog/mike.carif.io/bin/../src/TIL-npm-reinstall-packages-from.md](https://www.github.com/mcarifio/blog/blob/master/src//home/mcarifio/writing/blog/mike.carif.io/bin/../src/TIL-npm-reinstall-packages-from.md)
 ---
 
