@@ -12,6 +12,6 @@
 - [Freenode, Hexchat and cert, Oh My!](./freenode-hexchat-and-cert.md)
 - [Git Server Over SSH 2e](./git-server-over-ssh-2e.md)
 - [Userscripts](./userscripts.md)
-- [title TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`](./TIL-npm-reinstall-packages-from.md)
+- [TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`](./TIL-npm-reinstall-packages-from.md)
 <!-- - [eman: Anatomy of a Hack](./eman.md) -->
 <!-- - [Hiring Economics](./hiring-economics.md) -->
