@@ -17,3 +17,5 @@
 - [Userscripts](./userscripts.md)
 - [TIL `nvm install ${new_version} --reinstall-packages-from=${old_version}`](./TIL-npm-reinstall-packages-from.md)
 - [Thinking is Hard](./thinking-is-hard.md)
+- [Vscode 1.37.1 continues to improve](./vscode-continues-to-improve.md)
+- [Timetheft](./timetheft.md})
