@@ -19,3 +19,4 @@
 - [Thinking is Hard](./thinking-is-hard.md)
 - [Vscode 1.37.1 continues to improve](./vscode-continues-to-improve.md)
 - [Timetheft](./timetheft.md)
+- [Postgres 12 Just Released. Let's Upgrade](./upgrade-postgres-to-12.md)
