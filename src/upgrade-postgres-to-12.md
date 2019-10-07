@@ -25,7 +25,9 @@ There are still missing pieces:
 
 * A "meta-data" description of the API exported using either [OpenAPI](https://www.openapis.org/) or [gRPC](https://grpc.io/). I used to be bullish on OpenAPI aka swagger, but for various reasons, I think gRPC will win the day, especially if and when [it's integrated into browsers](https://grpc.io/blog/state-of-grpc-web/). gRPC also has _far_ better documentation and a more approachable programming model. 
 
-* A GraphQL engine to return queries as GraphQL response. [Hasura](https://github.com/hasura/graphql-engine/tree/master/server) could be interesting, but they haven't presented a way to build from source. They're a company with an open source product licensed Apache 2, they don't want to make competition easy.
+* A GraphQL engine to return queries as a [GraphQL](https://graphql.org/) response. [Hasura](https://github.com/hasura/graphql-engine/tree/master/server) could be interesting, but they haven't presented a way to build from source. They're a company with an open source product licensed Apache 2, they don't want to make competition easy. In many ways, GraphQL would be the better approach, since it's more data oriented and generic.
+
+
 
 ## Upgrade on Ubuntu
 
