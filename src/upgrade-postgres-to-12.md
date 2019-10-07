@@ -19,7 +19,7 @@ My ulterior motive is to explore three features that "documentize" psql:
    
 2. Using [JSON/JSONB to store data](http://www.postgresqltutorial.com/postgresql-json/) and to format query results using the [to_json](https://www.postgresql.org/docs/12/functions-json.html) function.
 
-3. Finally, exposing the database using [postgREST](https://github.com/PostgREST) for a "direct api" experience.
+3. Exposing the database using [postgREST](https://github.com/PostgREST) for a "direct api" experience.
 
 There are still missing pieces:
 
