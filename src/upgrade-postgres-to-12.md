@@ -48,7 +48,8 @@ systemctl list-units | grep postgres
 You want to copy your existing databases from 11 to 12. I assume here that your 11 instance is listening on the default pg port `5432`.
 
 ```bash
-pg_dumpall | (cd ~postgres; sudo -u postgres /usr/bin/psql -d postgres -p 5433)  # load the contents of 11's db to 12.
+mkdir ~/pg_dumpall
+pg_dumpall | tee ~/pg_dumpall/11-to-12.pgdump | (cd ~postgres; sudo -u postgres /usr/bin/psql -d postgres -p 5433)  # load the contents of 11's db to 12.
 ```
 
 This works because the distribution port for 12 is `5433`. You can test that 12 has your 11 data:
