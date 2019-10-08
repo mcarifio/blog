@@ -48,11 +48,11 @@ systemctl list-units | grep postgres
 You want to copy your existing databases from 11 to 12. I assume here that your 11 instance is listening on the default pg port `5432`.
 
 ```bash
-mkdir ~/pg_dumpall
-pg_dumpall | tee ~/pg_dumpall/11-to-12.pgdump | (cd ~postgres; sudo -u postgres /usr/bin/psql -d postgres -p 5433)  # load the contents of 11's db to 12.
+mkdir ~/postgres/pg_dumpall
+pg_dumpall | tee ~/postgres/pg_dumpall/11-to-12.pgdump | sudo -u postgres psql -p 5433  # load the contents of 11's db to 12.
 ```
 
-This works because the distribution port for 12 is `5433`. You can test that 12 has your 11 data:
+This works because the distribution port for 12 is `5433`. You can test that 12 has all your 11 data: 
 
 ```bash
 psql -p 5433 -c 'select version();'
@@ -70,14 +70,8 @@ psql -p 5433 -c "\du"
  root      | Superuser, Create role, Create DB                          | {}
 ```
 
-You can use some other query to confirm that the `pg_dumpall` worked.
+You may want to check for other changes specific to your database(s).
 
-You probably want to keep 11 around for a while. I decided to stop the service and disable it.
-
-```bash
-systemctl stop postgresql@11-main.service
-systemctl stop postgresql@11-main.service
-```
 
 I now want 12 to listen to the default pg port `5432`: 
 
@@ -88,5 +82,66 @@ systemctl status postgresql
 journalctl -u postgresql
 pgsql -c 'select version();'
 ```
+
+At some distant future, you may conclude that 12 suits your needs and the 11 data is superfluous:
+
+```bash
+cd /var/lib/postgresql
+tar -caf 11.tar.xz 11  # just in case you ever want to recover
+rm -rf 11
+apt purge $(dpkg --list|grep -e '\bpostgresql.*-11\b') # Find all 11 packages and purge them explicitly
+```
+
+
+
+## Upgrade on Fedora Core
+
+A similar approach (but not the same commands, unfortunately) works on Fedora Core 30. Unlike Ubuntu, FC30 looks for
+configuration information in "the default location" `/var/lib/pgsql/12/data`. And it must first be generated. Again as `root`:
+
+```bash
+dnf upgrade -y
+dnf install -y postgresql12{,-server,-devel,-llvmjit,-contrib,-plpython}
+export PATH=/usr/pgsql-12/bin:$PATH  # prefer the psql12 binaries
+postgresql-12-setup initdb  # create /var/lib/pgsql/12/data/*.conf
+```
+
+Note that both 11 and 12 are configured to listen to the default port `5432` on FC30, unlike the default (above) for Ubuntu. So, let's override the port
+for 12:
+
+```bash
+install -u postgres -g postgres -d /var/lib/pgsql/12/data/conf.d  # create a conf.d owned by user postgres
+echo "include_dir = 'conf.d'" >> /var/lib/pgsql/12/data/postgresql.conf  # look for additional conf files in conf.d
+echo 'port = 5433' > /var/lib/pgsql/12/data/conf.d/port-5433.conf # override the default port
+systemctl start postgresql-12  # start 12
+systemctl status postgresql-12
+sudo -u postgres psql -p 5433 -c 'select version();'
+```
+
+At this point you have two running postgresql instances, 11 listening on the default port 5432 and 12 listening on port 5433. Copy the contents from 11 to 12:
+
+```bash
+mkdir ~/postgres/pg_dumpall
+pg_dumpall | tee ~/postgres/pg_dumpall/11-to-12.pgdump | sudo -u postgres psql -p 5433  # load the contents of 11's db to 12.
+```
+
+
+You can test that 12 has your 11 data by looking for various things (e.g. users):
+
+```bash
+psql -p 5433 -c 'select version();'
+psql -p 5433 -c "\du"
+```
+
+At some distant future, you may conclude that 12 suits your needs and the 11 data is superfluous:
+
+```bash
+cd /var/lib/pgsql
+tar -caf 11.tar.xz 11  # just in case you ever want to recover
+rm -rf 11
+dnf remove postgresql-11
+```
+
+
 
 <!-- @publish: git commit -am "Postgres 12 just released. Let's upgrade." && git push -->
