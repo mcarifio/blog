@@ -77,11 +77,13 @@ I now want 12 to listen to the default pg port `5432`:
 
 ```bash
 emacs -nw /etc/postgres/12/main/postgres.conf # change port to 5432 (default)
+systemctl stop postgresql@11-main
+systemctl disable postgresql@11-main
 systemctl restart postgresql
 systemctl status postgresql
-journalctl -u postgresql
 pgsql -c 'select version();'
 ```
+At this point, you have 12 running your data from 11 listening on the default port. 11 is turned off and disabled, but could be turned back on as needed.
 
 At some distant future, you may conclude that 12 suits your needs and the 11 data is superfluous:
 
@@ -132,6 +134,19 @@ You can test that 12 has your 11 data by looking for various things (e.g. users)
 psql -p 5433 -c 'select version();'
 psql -p 5433 -c "\du"
 ```
+
+You (probably) want 12 to listen on the default port `5432` instead of 11 (and turn 11 off):
+
+```bash
+systemctl stop postgres-11
+systemctl disable postgres-11
+xz /var/lib/pgsql/12/data/conf.d/port-5433.conf
+systemctl restart postgres-12
+systemctl status postgres-12
+psql -c 'select version();'
+```
+
+At this point, you have 12 running your data from 11 listening on the default port. 11 is turned off and disabled, but could be turned back on as needed.
 
 At some distant future, you may conclude that 12 suits your needs and the 11 data is superfluous:
 
