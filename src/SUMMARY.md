@@ -21,3 +21,4 @@
 - [Timetheft](./timetheft.md)
 - [Postgres 12 Was Just Released. Let's Upgrade](./upgrade-postgres-to-12.md)
 - [Epson Printer Hacking](./epson-printer-hacking.md)
+- [Script More, Think Less](./script-more,-think-less.md)
