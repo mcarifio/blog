@@ -35,5 +35,9 @@ EOF
 summary=${here}/../src/SUMMARY.md
 echo "- [${title}](./${md})" >> ${summary}
 git add ${mdpath} ${summary}
+git commit -m "added ${mdpath}"
+mdbook serve &
+xdg-open http://127.0.0.1/${html}
+echo "git commit --amend # when you've completed ${mdpath}"
 ec ${mdpath} ${summary}
 
