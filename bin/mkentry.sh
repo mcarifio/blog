@@ -2,8 +2,15 @@
 me=$(realpath ${BASH_SOURCE})
 here=${me%/*}
 
-title=${1:?'expecting a title'}
-name=${2:?'expecting a filename'}
+function title2name {
+    local title=${1:?'expecting a title'}
+    # gross; use sed to convert spaces to dashes and then lowercase the string.
+    sed -E 's/[[:space:]]+/-/g ; s/.*/\L\0/' <<< "${title}"
+}
+
+
+title="${1:?'expecting a title'}"
+name=${2:-$(title2name "${title}")}
 md=${name}.md
 mdpath=$(realpath ${here}/..)/src/${md}
 html=${name}.html
@@ -28,5 +35,5 @@ EOF
 summary=${here}/../src/SUMMARY.md
 echo "- [${title}](./${md})" >> ${summary}
 git add ${mdpath} ${summary}
-emacsclient ${mdpath} ${summary}
+ec ${mdpath} ${summary}
 

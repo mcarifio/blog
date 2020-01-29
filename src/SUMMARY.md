@@ -20,3 +20,4 @@
 - [Vscode 1.37.1 continues to improve](./vscode-continues-to-improve.md)
 - [Timetheft](./timetheft.md)
 - [Postgres 12 Was Just Released. Let's Upgrade](./upgrade-postgres-to-12.md)
+- [Epson Printer Hacking](./epson-printer-hacking.md)
