@@ -23,3 +23,4 @@
 - [Epson Printer Hacking](./epson-printer-hacking.md)
 - [Script More, Think Less](./script-more,-think-less.md)
 - [Discovering Jsonnet](./discovering-jsonnet.md)
+- [Missed The Memo: Java Single-File Source-Code Programs](./missed-the-memo:-java-single-file-source-code-programs.md)
