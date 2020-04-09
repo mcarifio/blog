@@ -26,3 +26,4 @@
 - [Missed The Memo: Java Single-File Source-Code Programs](./missed-the-memo:-java-single-file-source-code-programs.md)
 - [Selecting a (GNOME) window by Name](./selecting-a-gnome-window-by-name.md)
 - [Lions and Tigers and Nvidia, Oh My!](./lions-and-tigers-and-nvidia-oh-my.md)
+- [Office Tour](./office-tour.md)
