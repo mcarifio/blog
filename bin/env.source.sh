@@ -18,5 +18,5 @@ fi
 
 # Add here to the path so you can run all the bins.
 # export PATH=${here}:$PATH
-path_if_exists ${here}
+path.add ${here}
 (set -x; doctor.sh)

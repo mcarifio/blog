@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
-here=$(readlink -f $(dirname ${BASH_SOURCE}))
-blog=$(readlink -f ${here}/../blog)
-suffix=${blog##*/}
 
-page=${1:-''}
-target=${2:-www-data@do:html/mike.carif.io/html}
+# Publish (rsync) all modified file to https://mike.carif.io/blog/ "under the covers" over ssh.
+# TODO mike@carif.io: best way to make all the hidden configuration information explicit and documented?
 
-(cd ${here}/..; mdbook build)
-# scp changes up to blog, url currently hardcoded. Assumes lotsa ssh configuration too.
+me=$(realpath ${BASH_SOURCE:-$0}) # pathname, this script
+here=$(dirname ${me}) # script's folder
+blog=$(realpath ${here}/../blog) # blog's folder
+suffix=${blog##*/} # blog's relative folder, for rsync below
+host=$(basename $(realpath ${here}/..)) # hacky, the folder name is also the host target
+target=${2:-www-data@do:html/${host}/html} # target of publish as an ssh handle
+full_target=${target}/${suffix}
+src=$(realpath ${here}/..) # src might _not_ be a child of ${host}
+
+mdbook build ${src}
+# changes changes up to `${blog}`
 # scp -r ${blog} ${target}/${suffix}
-rsync -ravuc -e ssh ${blog}/ ${target}/${suffix}
-gnome-open https://mike.carif.io/blog
+if [[ -z "${PUBLISH_SKIP_UPLOAD}" ]] ; then
+    rsync -ravuc -e ssh ${blog}/ ${full_target}
+    xdg-open https://${host}/blog
+else
+    echo "PUBLISH_SKIP_UPLOAD: ${PUBLISH_SKIP_UPLOAD}, skipping upload."
+fi
+
 

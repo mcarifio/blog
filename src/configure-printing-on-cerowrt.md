@@ -1,9 +1,9 @@
 ---
-Author: Mike Carifio &lt;<mike@carif.io>&gt;\
-Title: How To Configure USB Printing on a CeroWrt Router\
-Date: 2013-01-01\
-Tags: bufferbloat, cerowrt, netgear, router, printer, ipp\
-Blog: [https://mike.carif.io/blog/configure-printing-on-cerowrt.html]([https://mike.carif.io/blog/configure-printing-on-cerowrt.html)\
+Author: Mike Carifio &lt;<mike@carif.io>&gt; \
+Title: How To Configure USB Printing on a CeroWrt Router \
+Date: 2013-01-01 \
+Tags: #bufferbloat #cerowrt #netgear #router #printer #ipp \
+Blog: [https://mike.carif.io/blog/configure-printing-on-cerowrt.html]([https://mike.carif.io/blog/configure-printing-on-cerowrt.html) \
 VCS: [https://www.github.com/mcarifio/blog/blob/master/src/configure-printing-on-cerowrt.md](https://www.github.com/mcarifio/blog/blob/master/src/configure-printing-on-cerowrt.md)
 ---
 
@@ -11,7 +11,7 @@ VCS: [https://www.github.com/mcarifio/blog/blob/master/src/configure-printing-on
 
 
 _Note: This blog entry is actually from about five years ago and so is dated. The gist of the idea remains intact, namely that usb printers without wifi capabilities can use the router itself to provide wireless printing. Almost all newer printers have wifi built-in already, so this wifi-to-usb hack is less relevant. I hate throwing work away, however, so I've kept it for posterity. But whatever money you save using an older printer without wifi is consumed with the configuration exercise below. Buy a new printer (sadly).
-Because that's probably the better approach, I've made no effort to clean up the approach below. I might someday if its warranted._
+Because that's probably the better approach, I've made no effort to clean up the approach below. I might someday if its warranted.
 
 At my (ex)boss [Alex Chiang's](http://www.chizang.net/alex/blog/) recommendation, I purchased a [Netgear N600 Wireless Dual Band Gigabit Router](http://www.netgear.com/wndr3800) known in the biz as a _wndr3800_.
 Alex suggested it to deal with the <a href="">[_bufferbloat problem_](http://www.bufferbloat.net/projects/bloat/wiki/Introduction) which basically
@@ -152,7 +152,7 @@ direct usb://HP/LaserJet%203330?serial=00SGK26C0WZM "HP LaserJet 3330" "HP Laser
 ```
 
 Note that you may have to fiddle with your printer to get the router to sense it. I had to unplug the cable, 
-reboot the router and then plug the cable back in. This is magic here. 
+reboot the router and then plug the cable back in. Here be magic. 
 Next modify /etc/cupsd.conf according to this diff file. You'll have to do it by hand. Patch appears missing. (Thanks, Alex, for educating me about diff and patch.)
 
 ```bash

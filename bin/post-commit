@@ -2,9 +2,9 @@
 
 # usage: ln -s $(git rev-parse --show-toplevel)/bin/post-commit $(git rev-parse --show-toplevel)/hooks/post-commit
 
-here=$(readlink -f $(dirname ${BASH_SOURCE}))
+here=$(realpath $(dirname ${BASH_SOURCE}))
 root=$(git rev-parse --show-toplevel)
-blog=$(readlink -f ${root}/blog)
+blog=$(realpath ${root}/blog)
 suffix=${blog##*/}
 bin=${root}/bin
 # enumerate files actually committed?
