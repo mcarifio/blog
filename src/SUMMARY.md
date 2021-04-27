@@ -28,6 +28,6 @@
 - [Lions and Tigers and Nvidia, Oh My!](./lions-and-tigers-and-nvidia-oh-my.md)
 - [Office Tour](./office-tour.md)
 - [Use The Current](./use-the-current.md)
-- [PulseAudio Sucks. What That Teaches Us About Software Design.](./pulseaudio-sucks-what-that-teaches-us-about-software-design.md)
-- [Buying Breathing Room](./buying-breathing-room.md)
+<!-- - [PulseAudio Sucks. What That Teaches Us About Software Design.](./pulseaudio-sucks-what-that-teaches-us-about-software-design.md) -->
+<!-- - [Buying Breathing Room](./buying-breathing-room.md) -->
 - [Build vscode From Sources](./build-vscode-from-sources.md)

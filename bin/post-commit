@@ -8,4 +8,5 @@ blog=$(realpath ${root}/blog)
 suffix=${blog##*/}
 bin=${root}/bin
 # enumerate files actually committed?
-${bin}/publish.sh
+echo "next: ${bin}/publish.sh"
+
