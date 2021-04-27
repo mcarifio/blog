@@ -30,3 +30,4 @@
 - [Use The Current](./use-the-current.md)
 - [PulseAudio Sucks. What That Teaches Us About Software Design.](./pulseaudio-sucks-what-that-teaches-us-about-software-design.md)
 - [Buying Breathing Room](./buying-breathing-room.md)
+- [Build vscode From Sources](./build-vscode-from-sources.md)
