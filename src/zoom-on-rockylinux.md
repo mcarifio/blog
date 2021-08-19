@@ -9,9 +9,9 @@ VCS: [https://www.github.com/mcarifio/blog/blob/master/tree/src/zoom-on-rockylin
 
 # Zoom, Wayland, Screensharing and RockyLinux
 
-I recently landed at [Ctrl IQ](https://www.ctrliq.com/). I've adopted [rockylinux](https://www.rockylinux.org/) as my primary linux distribution as a result after many year on ubuntu and fedora. Installing software and configuring my environment(s) takes a little time and a lotta learning curve, but that's the fun. Like many, I use zoom for video conferencing and -- more importantly -- screensharing. I've also made a concerted effort -- and shed some tears -- to adopt [wayland]() over X11. And I don't want to backslide, tempting as it can sometimes be. I recently tried to share my screen in a zoom meeting and was met with an error saying in so many words "rocky isn't supported for wayland". So I hacked it. Here's _my_ hack, which seems to work but which I hope will be unnecessary in short order.
+I recently landed at [Ctrl IQ](https://www.ctrliq.com/). I've adopted [rockylinux](https://www.rockylinux.org/) as my primary linux distribution as a result after many year on ubuntu and fedora. Installing software and configuring my environment(s) takes a little time and a lotta learning curve, but that's the fun. Like many, I use zoom for video conferencing and -- more importantly -- screensharing. I've also made a concerted effort -- and shed some tears -- to adopt [wayland](https://wayland.freedesktop.org/) over X11. And I don't want to backslide, tempting as it can sometimes be. I recently tried to share my screen in a zoom meeting and was met with an error saying in so many words "rocky isn't supported for wayland". So I hacked it. Here's _my_ hack, which seems to work but which I hope will be unnecessary in short order.
 
-I used a mash-up of [Rutenburg's](https://www.guyrutenberg.com/2020/06/22/fixing-zoom-screen-sharing-on-debian-unstable/) hack with a sprinkle of [os-release's](https://www.freedesktop.org/software/systemd/man/os-release.html) more arcane variables. As `root` here goes:
+I used a mash-up of [Rutenburg's](https://www.guyrutenberg.com/2020/06/22/fixing-zoom-screen-sharing-on-debian-unstable/) approach with a sprinkle of [os-release's](https://www.freedesktop.org/software/systemd/man/os-release.html) more arcane variables. As `root` here goes:
 
 ```bash
 # mv /etc/os-release{,.dist} # save the distributed os-release
@@ -40,7 +40,7 @@ EOF
 
 Here's how to read these changes:
 
-* I have `os-release` claim that it's centos 8 since centos is supported and rocky can be thought of (currently) as a centos variant.
+* I have `os-release` claim that it's centos 8 since zoom supports centos and rocky can be thought of (currently) as a centos variant.
 
 * I record that variation with `VARIANT*`. Variants _seem_ to overide their "base" counterparts. `lsb_release -a` reports the right stuff:
 
