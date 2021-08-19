@@ -98,6 +98,7 @@ Write Here...
 <!-- @publish: git commit -am "${_title}" && git push -->
 EOF
 
+
     local _summary=${_here}/../src/SUMMARY.md
     echo "- [${_title}](./${_md})" >> ${_summary}
     git add ${_mdpath} ${_summary}
@@ -110,9 +111,4 @@ EOF
     
 }
 
-# skip specific option parsing
-# _start_at --start=_start $@
-
-# add specific option parsing
-# _start_at --start=_fw_start --forward=_start-${_basename}
 _start_at --start=_fw_start --forward=_start-${_basename} $@

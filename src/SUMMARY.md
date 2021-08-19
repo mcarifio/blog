@@ -21,6 +21,7 @@
 - [Timetheft](./timetheft.md)
 - [Postgres 12 Was Just Released. Let's Upgrade](./upgrade-postgres-to-12.md)
 - [Epson Printer Hacking](./epson-printer-hacking.md)
+<<<<<<< HEAD
 - [Script More, Think Less](./script-more,-think-less.md)
 - [Discovering Jsonnet](./discovering-jsonnet.md)
 - [Missed The Memo: Java Single-File Source-Code Programs](./missed-the-memo:-java-single-file-source-code-programs.md)
@@ -32,3 +33,7 @@
 <!-- - [Buying Breathing Room](./buying-breathing-room.md) -->
 - [Build vscode From Sources](./build-vscode-from-sources.md)
 - [Zoom, Wayland, Screensharing and RockyLinux](./zoom-on-rockylinux.md)
+||||||| 6432b12
+=======
+- [Script More, Think Less](./script-more,-think-less.md)
+>>>>>>> 7123b8fa3803fbc381bb18f7f57ba26c7338b2bc

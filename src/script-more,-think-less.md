@@ -34,6 +34,3 @@ The automation has a few "behind the scenes" bonuses:
 
 These two operations together makes it easy to review text changes: 1) save the file, 2) review the modifications in the web browser. The next step
 would be to couple those two operations. Don't know how yet.
-
-
-
