@@ -22,7 +22,7 @@ source __fw__.sh || { >&2 echo "$0 cannot find __fw__.sh"; exit 1; }
 function _fw_start {
     local _self=${FUNCNAME[0]}
 
-    declare -Ag _flags+=([--template-flag]=default, --port=4444)
+    declare -Ag _flags+=([--template-flag]=default, [--port]=4444)
     local -ag _rest=()
     
     while (( $# )); do
